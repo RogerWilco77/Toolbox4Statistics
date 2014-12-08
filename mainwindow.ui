@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>926</width>
-    <height>447</height>
+    <width>1067</width>
+    <height>538</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -38,17 +38,13 @@
     </item>
     <item>
      <layout class="QFormLayout" name="formLayout">
+      <property name="fieldGrowthPolicy">
+       <enum>QFormLayout::FieldsStayAtSizeHint</enum>
+      </property>
       <item row="0" column="0">
        <widget class="QLabel" name="label_6">
         <property name="text">
          <string>lower specification limit</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="label_7">
-        <property name="text">
-         <string>upper specification limit</string>
         </property>
        </widget>
       </item>
@@ -59,27 +55,20 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="label_8">
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_7">
         <property name="text">
-         <string>potential capability</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="0">
-       <widget class="QLabel" name="label_9">
-        <property name="text">
-         <string>critical capability for upper limit</string>
+         <string>upper specification limit</string>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
        <widget class="QDoubleSpinBox" name="spnbxUpperSpec"/>
       </item>
-      <item row="4" column="1">
-       <widget class="QLabel" name="lblCriticalCapabilityForUpperLimit">
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_8">
         <property name="text">
-         <string>TextLabel</string>
+         <string>potential capability</string>
         </property>
        </widget>
       </item>
@@ -104,6 +93,20 @@
         </property>
        </widget>
       </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="label_9">
+        <property name="text">
+         <string>critical capability for upper limit</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QLabel" name="lblCriticalCapabilityForUpperLimit">
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
+      </item>
       <item row="5" column="0" colspan="2">
        <widget class="QPushButton" name="pushButton">
         <property name="text">
@@ -112,9 +115,29 @@
        </widget>
       </item>
       <item row="6" column="0" colspan="2">
-       <widget class="QPushButton" name="pushButton_2">
+       <widget class="QPushButton" name="btnShowGraph">
         <property name="text">
          <string>show graph</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="1">
+       <widget class="QSpinBox" name="spnNumberOfBins"/>
+      </item>
+      <item row="8" column="0">
+       <widget class="QLabel" name="label_12">
+        <property name="text">
+         <string>width for histogram bins</string>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="1">
+       <widget class="QDoubleSpinBox" name="doubleSpinBox_2"/>
+      </item>
+      <item row="7" column="0">
+       <widget class="QLabel" name="label_11">
+        <property name="text">
+         <string>number of bins for histogram</string>
         </property>
        </widget>
       </item>
@@ -197,6 +220,12 @@
       </item>
      </layout>
     </item>
+    <item>
+     <widget class="QCustomPlot" name="graphwidget" native="true"/>
+    </item>
+    <item>
+     <widget class="QCustomPlot" name="histogramWidget" native="true"/>
+    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -204,7 +233,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>926</width>
+     <width>1067</width>
      <height>22</height>
     </rect>
    </property>
@@ -231,6 +260,14 @@
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>QCustomPlot</class>
+   <extends>QWidget</extends>
+   <header>qcustomplot.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 
+#include <qcustomplot.h>
+
 
 #include "dataset.h"
 
@@ -29,7 +31,7 @@ private:
 
 public slots:
     void saveDataToFileAndShowGraphInGnuPlot();
-    void showGraph();
+    void updateGraph();                             //!< updates both graph panes (widgets) in the mainwindow. left is series plot, right is histogram
 
     void updateCapability(double value);
 

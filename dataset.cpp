@@ -179,3 +179,61 @@ void Dataset::writeDataSetToFile(QVector<double> &dataVector){
     file.close();
 
 }
+
+
+void Dataset::calculateBinsForHistogram(QVector<double> &dataVector, double widthOfBins, QVector<double> &bins, QVector<double> &frequencies)
+{
+    int numberOfBinsToLowestValue;
+    int numberOfBinsToHighestValue;
+
+    QVector<double> sortedVector;
+
+    double lowestBinCenter;
+
+
+
+    sortedVector = dataVector;
+    qSort(sortedVector.begin(), sortedVector.end()); //sort data
+
+    //int numberOfBins = sqrt(sortedVector.size());
+
+
+    numberOfBinsToLowestValue =  sortedVector.at(0)/widthOfBins;
+    numberOfBinsToHighestValue = sortedVector.at(sortedVector.size()-1)/widthOfBins;
+    int numberOfBins = abs(numberOfBinsToHighestValue) + abs(numberOfBinsToLowestValue)+2;
+
+    lowestBinCenter = (numberOfBinsToLowestValue) * widthOfBins;   //cosnider modification to int!!! last bin is lost!!!
+
+    for (int i = 0 ; i < numberOfBins ; i++)
+    {
+      bins.append(lowestBinCenter + i * widthOfBins);
+    }
+
+    double lowerBoundary;
+    double upperBoundary;
+
+    for (int i = 0 ; i < numberOfBins ; i++)
+    {
+        frequencies.append(0.0);
+    }
+
+
+    // count frequencies per bin
+    int k = 0;
+
+    for (int i = 0 ; i < numberOfBins ; i++)
+    {
+        //lowerBoundary = bin.at(i)-0.5* widthOfBins;
+        upperBoundary = bins.at(i); //+ 0.5* widthOfBins;
+
+        int counter = 0;
+        while (sortedVector.at(k) < upperBoundary)
+        {
+            counter = counter + 1;
+            frequencies.replace(i, counter);
+            k++;
+        }
+
+    }
+
+}

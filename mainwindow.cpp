@@ -11,6 +11,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->spnbxLowerSpec, SIGNAL(valueChanged(double)), this, SLOT(updateCapability(double))) ;
 
     connect(ui->spnbxUpperSpec, SIGNAL(valueChanged(double)), this, SLOT(updateCapability(double)));
+
+    connect(ui->btnShowGraph, SIGNAL(clicked()), this, SLOT(updateGraph()));
     //Dataset::createRandomData(100, dataVector);
 
 
@@ -41,7 +43,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     connect(ui->pushButton, SIGNAL(clicked()), this, SLOT(saveDataToFileAndShowGraphInGnuPlot()));
-    connect(ui->pushButton_2, SIGNAL(clicked()), this, SLOT(showGraph()));
 
 
 
@@ -57,8 +58,44 @@ void MainWindow::saveDataToFileAndShowGraphInGnuPlot(){
 
 }
 
-void MainWindow::showGraph() {
-    system("/usr/local/bin/gnuplot ~/Desktop/test/gnuplotConfiguration");
+void MainWindow::updateGraph() {
+
+    // create the series plot
+    QVector<double> x;
+
+     for (int i = 0 ; i < dataVector.size() ; i++)
+     {
+         x.append(i);
+     }
+
+
+    ui->graphwidget->addGraph();
+    ui->graphwidget->graph(0)->setData(x, dataVector);
+
+    ui->graphwidget->xAxis->setLabel("data point");
+    ui->graphwidget->yAxis->setLabel("value");
+
+
+    ui->graphwidget->rescaleAxes();
+    ui->graphwidget->replot();
+
+
+    // create the histogram
+    QCPBars *myBars = new QCPBars(ui->histogramWidget->xAxis, ui->histogramWidget->yAxis);
+    ui->histogramWidget->addPlottable(myBars);
+    QVector<double> keyData;
+    QVector<double> valueData;
+    //keyData << 1 << 2 << 3;
+    //valueData << 2 << 4 << 8;
+
+    Dataset::calculateBinsForHistogram(dataVector, 0.1, keyData, valueData);
+
+    myBars->setData(keyData, valueData);
+    myBars->setWidth(0.1);
+    ui->histogramWidget->rescaleAxes();
+    ui->histogramWidget->replot();
+
+
 
 }
 

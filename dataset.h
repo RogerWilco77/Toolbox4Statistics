@@ -9,7 +9,7 @@
 #include <QTime>
 #include <QFile>
 
-#include <QStandardPaths>
+//#include <QStandardPaths>
 
 
 #include <QDebug>
@@ -41,6 +41,10 @@ public slots:
 
     // file handling
     static void writeDataSetToFile(QVector<double>&dataVector);
+
+
+    // visualisation
+    static void calculateBinsForHistogram(QVector<double> &dataVector, double widthOfBins, QVector<double> &bins, QVector<double> &frequencies); //! < calculates the binning. Needs the Vector to bin, the vector with the bins and the frequencies
 
 
     //setters
